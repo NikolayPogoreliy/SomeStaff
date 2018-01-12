@@ -1,0 +1,540 @@
+<div>
+	<img src="images/form_designer.png" class="tox-module-logo"/>
+	<h4>Form Design <div id="moduleversion"></div><img class="tox-help" src="img/help.png" data-toggle="modal" data-target="#help1" /></h4>
+	<p>Create or Edit a Design<a href='' data-toggle="modal" data-target="#properties" hidden></a></p>
+</div>
+<div id="tabs">
+	<ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#tabs-1" aria-controls="tabs-1" role="tab" data-toggle="tab">Form Design</a></li>
+	    <li role="presentation" class="view-menu disabled disabled-div"><a href="#tabs-3" aria-controls="tabs-3" role="tab" data-toggle="tab">Viewer</a></li>
+	    <li role="presentation" class="view-menu disabled disabled-div hidden"><a href="#tabs-2" aria-controls="tabs-2" role="tab" data-toggle="tab">Add Template</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="tabs-1" role="tabpanel" class="tab-pane fade in active designs">
+			<div class="row form-horizontal">
+				<div class="col-sm-12 form-group">
+					<div class="form-inline">
+						<div class="form-group form-group-sm col-sm-4">
+							<button class="btn btn-primary btn-sm tox-button-retry-dn-filter tox-button" onclick="jajascript:updateTable()">Refresh</button>
+							<button id="add-design" class="btn btn-primary btn-sm tox-button-add-action tox-button">Add Design</button>
+						</div>
+						<div class="form-group form-group-sm col-sm-4">
+							<label for="paginator">Show</label>
+							<input type="number" id="designs-paginator" value="10" min="10" max="100" step="10" class="form-control">
+							<label for="designs-paginator">entries</label>
+						</div>
+						<div class="form-group form-group-sm col-sm-4">
+							<label for="designs-filter">Search:</label>
+							<input type="text" id="designs-filter" class="form-control">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+		<div id="tabs-2" role="tabpanel" class="tab-pane fade in addedit">
+			<div class="row form-horizontal">
+				<div class="form-group form-group-sm">
+					<label class="col-sm-2 control-label"><h2>Workflow Form name:</h2></label>
+					<div class="col-sm-8">
+						<h2><input class="form-control" type="text" name="defname"  id="defname" size="60"/></h2>
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<!-- <input type="checkbox" id="addons" onclick="javascript:ShowHideAddons()"/> Addons <br> -->
+					<!-- <input type="checkbox" id="preview" onclick="javascript:Preview()"/> Preview <br> -->
+					<label for="" class="col-sm-3 control-label">Show Addons</label>
+                    <div class="col-lg-3">
+					   	<div class="material-switch tox-form-customize-class">
+					   		<input id="addons" onclick="javascript:ShowHideAddons()" type="checkbox"/>
+					       	<label for="addons" class="label-default check"></label>
+					       	<label for="addons" class="show-label">No</label>
+					       	<label for="addons" class="hide-label">Yes</label>
+						</div>
+					</div> 
+                    <label for="" class="col-sm-3 control-label">Show Preview</label>
+                    <div class="col-lg-3">
+					   	<div class="material-switch tox-form-customize-class">
+					   		<input id="preview" onclick="javascript:Preview()" type="checkbox"/>
+					       	<label for="preview" class="label-default check"></label>
+					       	<label for="preview" class="show-label">No</label>
+					       	<label for="preview" class="hide-label">Yes</label>
+						</div>
+					</div> 
+				</div>
+			</div>
+			
+			
+			<!-- <input type="checkbox" id="numbers" onclick="javascript:Numbers()"/> Numbers  -->
+			<div class="row">
+				<div class="col-sm-5 col-sm-offset-1">
+					<div class="form form-horizontal design-form" id="forms">
+						
+						<ol id="formsort" class="formsort nonumber">
+							<!--[if ie]> 
+								&nbsp;
+							<![endif]-->
+						</ol>
+					</div>
+				</div>
+				
+				<div class="col-sm-5">
+					<div class="form form-horizontal design-form" id="elements">
+						
+						<ul  name="defaults" id="defaults" class="defaults">		
+							<li name="ed_label" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label name="label" class="control-label col-sm-4 title-label">Title / Label</label>
+									<div class="col-sm-1 col-sm-offset-7">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_sublabel" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label name="label" class="control-label col-sm-4">Subtitle / Sublabel</label>
+									<div class="col-sm-1 col-sm-offset-7">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_dndisplay" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label name="label" class="control-label col-sm-3">DN Display:</label>
+									<div class="col-sm-8" name="dndisplay" style="padding-top:6px">DN to display</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_textfield" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label name="label" class="control-label col-sm-3">Text field:</label>
+									<div class='col-sm-8'>
+										<input class="form-control" type="text" value=""/>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_objektfield" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class='control-label col-sm-3' name="label">Object field:</label>
+									<div class="col-sm-5">
+										<input type="text" value="" class="form-control">
+									</div>
+									<div class="col-sm-3">
+										<img name="lupe" src="images/search_white.png" width="14px"/>
+										<img name="choose" src="images/export_white.png" width="14px"/>
+										<img name="rubber" src="images/edit_white.png" width="14px"/>
+										<img name="delete" src="images/del.png" width="14px"/>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_password" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class='col-sm-3 control-label' name="label">Password:</label>
+									<div class="col-sm-8">
+										<input class="form-control" type="password" value="">
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_textarea" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">Textarea:</label>
+									<div class="col-sm-8">
+										<textarea class="form-control" rows="3" cols="28"></textarea>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_radiopick" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">Radio Picklist:</label>
+									<div class="col-sm-8" name="radios" style="padding-top:4px">
+										<input name="radio" type="radio">Radio1 
+										<input name="radio" type="radio">Radio2
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_mvcheckbox" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">Checkbox:</label>
+									<div class="col-sm-8" name="boxes" style="padding-top:4px">
+										<input type="checkbox" value="true">Option1 
+										<input type="checkbox" value="false">Option2 
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_picklist" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">Picklist:</label>
+									<div class="col-sm-8" name="picks">
+										<select class="form-control">
+											<option selected="selected">Click here to select a value ...</option>
+											<option>Item1</option>
+											<option>Item2</option>
+											<option>Item3</option>
+										</select>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_pickfield" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class='col-sm-3 control-label' name="label">Multi Value Picklist</label>
+									<div class="col-sm-5" name="picks" style="vertical-align: middle;">
+										<select multiple class="form-control">
+											<option value="" selected="selected">Value1</option>
+											<option>Value2</option>
+										</select>
+									</div>
+									<div class="col-sm-3">
+										<img name="lupe" src="images/search_white.png" width="14px"/>
+										<img name="choose" src="images/export_white.png" width="14px"/>
+										<img name="rubber" src="images/edit_white.png" width="14px"/>
+										<img name="delete" src="images/del.png" width="14px"/>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_selectlist" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">Multi Value Selectlist</label>
+									<div class="col-sm-8" name="picks">
+										<div class="col-sm-5">
+											<select class="form-control" multiple>
+												<option value="" selected="selected">Value1</option>
+												<option>Value2</option>
+											</select>
+										</div>
+										<div class="col-sm-2">
+											<img src="images/formdesign/rightleft.png"/>
+										</div>
+										<div class="col-sm-5">
+											<select class="form-control" multiple>
+												<option value="" selected="selected"></option>
+												<option></option>
+											</select>
+										</div>			
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_html" class="elementssort" onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">HTML</label>
+									<div class="col-sm-8">
+										<div name="somehtml" style="padding-top:6px">HTML Source</div>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_datatable" class="elementssort addon" onclick="javascript:editthis(this)" hidden="hidden">
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">Datatable</label>
+									<div class="col-sm-8">
+										<img src="images/formdesign/datatable.png" width="250px" title="This is a Addon Product, and needs to be purchased separatly"/>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_hr" class="elementssort"  onclick="javascript:editthis(this)">
+								<div class="form-group form-group-sm" >
+									<div class="col-sm-11">
+										<hr class="style-one"/>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+							<li name="ed_buttons" class="elementssort" onclick="javascript:editthis(this)" >
+								<div class="form-group form-group-sm">
+									<label class="col-sm-3 control-label" name="label">&nbsp;</label>
+									<div class="col-sm-8">
+										<div name="buttons">
+											<input class="btn btn-sm btn-default" type="button" name="buttons" value="submit"/>
+											<input class="btn btn-sm btn-default" type="button" name="buttons" value="cancel"/>
+										</div>
+									</div>
+									<div class="col-sm-1">
+										<img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(event,this)"/>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+				
+			</div>
+			<div class='col-sm-12 tox-buttons'>
+				<button class="btn btn-primary btn-lg" id="save-design" onclick="javascript:saveFormDesign()">Save</button>
+				<button class="btn btn-primary btn-lg" onclick="javascript:resetFormDesign()">Reset</button>
+				<button class="btn btn-default btn-lg" onclick="javascript:closeTabs()">Cancel</button>
+			</div>
+			
+			<br><br>
+						
+		</div>
+		<div id="tabs-3" role="tabpanel" class="tab-pane fade in ">
+			<div class="row form-horizontal" id="tox-display-controls">
+   				<div class="form-group form-group-sm col-sm-5" id="">
+             		<label class="col-sm-3 control-label">Select view:</label>
+              		<div class="col-sm-3">
+              			<select class="form-control" id="displaytype"><option value="JSON">JSON</option><option value="XML">XML</option><option value="HTML">HTML</option></select>
+					</div>
+          		</div>
+	    	</div>		
+			<div class="row" id="viewer" name="viewer">Select a object from the Versionlist to be Displayed here</div>
+		</div>	
+		
+	</div>
+</div>
+
+<!--Modals-->
+<div id="help1" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="tox-help-header">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content tox-help-modal">
+            <div class="modal-header">
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                <h4 class="modal-title" id="tox-help-header"><span class="tox-help-question">?</span> Form Designer Help</h4>
+            </div>
+            <div class="modal-body">
+            	<p>All Workflow Designs are Stored / Listed here<br>
+				These Forms represent the Request / Approval Forms from the IDM Portal / Workflows</p>
+				<p><img src="images/edit_conn.png" width="16px"> Edit a Form Design<br>
+				<img src="images/search_green.png" width="16px"> Show or Export a Form Design <br>
+				<img src="images/export_green.png" width="16px"> Export the Object<br>
+				<img src="images/delete_conn.png" width="16px"> Delete last Version of this Object<br>If there is only one Version left, the Entry will be completly deleted</p>
+	 			<p>To Add or Edit design:</p>
+	 			<p>Click on <button class="btn btn-primary btn-sm tox-button-add-action tox-button">Add Design</button>-button</p>
+	 			<p>Click on the Right Items in the Box to Add it to the the Formular<br>
+				You can then Edit its Properties by Leftclick on it on the Left. A Popup Box will apear.<br>
+				</p>
+				<p>Click on Addons to Display available Addons for the Forms in the Portal.<br>
+				To Preview the Form (Remove Distractions), you can tick the Preview Box</p>
+				<p>
+				<img src="images/del.png" width="16px"> Delete this Item from the Form (Only on the Left Side)<br></p>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="properties" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="tox-help-header">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content tox-help-modal">
+            <div class="modal-header">
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                <h4 class="modal-title" id="tox-help-header"> Properties </h4>
+            </div>
+            <div class="modal-body">
+            	
+			</div>
+        </div>
+    </div>
+</div>
+
+
+<div id="help2" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="tox-help-header">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content tox-help-modal">
+            <div class="modal-header">
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                <h4 class="modal-title" id="tox-help-header"><span class="tox-help-question">?</span> Form Designer Help</h4>
+            </div>
+            <div class="modal-body">
+            	<p>Click on the Right Items in the Box to Add it to the the Formular<br>
+				You can then Edit its Properties by Leftclick on it on the Left. A Popup Box will apear.<br>
+				</p>
+				<p>Click on Addons to Display available Addons for the Forms in the Portal.<br>
+				To Preview the Form (Remove Distractions), you can tick the Preview Box</p>
+				<p>
+				<img src="images/del.png" width="16px"> Delete this Item from the Form (Only on the Left Side)<br></p>
+			</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var ModuleVersion="vPROJECT_VERSION";
+    appendScriptsSync([{src:"jquery.ui.min.js"},{src: "js/ui.js"}, {src: "js/menudata.js"}, {src: "formdesign.js"},{src: "formdesigneditor.js"}]);
+</script>
+<!--  	<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Workflow Forms</a></li>	
+		<li><a href="#tabs-2">Create or Edit a Workflow Formular</a></li>
+		<li><a href="#tabs-3">Display / Export a Formular</a></li>
+	</ul>
+	<div id="tabs-1">
+<h2>Workflow Formulars</h2>
+<button onclick='javascript:updateTable();'>Refresh</button><br><br>
+<div class="tablecontainer">
+<table class="display" id="designlist" >
+	<thead>
+		<tr>
+			<th align="left">ObjectID</th>
+			<th align="left">PK(ID)</th>
+			<th align="left">Name</th>
+			<th align="left">Changetime</th>
+			<th align="left">Version</th>
+			<th align="left">ServerID</th>
+			<th align="left">Commands</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>empty</td>
+			<td align="right">empty</td>
+			<td>empty</td>
+			<td>empty</td>
+			<td align="right">empty</td>
+			<td>empty</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<img src="images/help.png" width="16px" onclick="javascript:$('#help1').dialog('open')"/>
+</div>
+<br>
+</div>
+
+	<div id="tabs-2" align="left">
+<h2>Workflow Formname: <input type="text" name="defname"  id="defname" size="60"/></h2>
+<input type="checkbox" id="addons" onclick="javascript:ShowHideAddons()"/> Addons <br>
+<input type="checkbox" id="preview" onclick="javascript:Preview()"/> Preview <br>
+<input type="checkbox" id="numbers" onclick="javascript:Numbers()"/> Numbers 
+<table style="vertical-align: top; width: 900px;"  >
+<tr><td style="vertical-align: top;width: 510;">
+<div id="forms">
+	<img src="images/blank.gif" width="500px" height="1px"/>
+	<ol id="formsort" class="formsort nonumber">
+		<!--[if ie]> 
+			&nbsp;
+		<![endif]
+	</ol>
+</div>
+
+</td><td style="vertical-align: top;">
+<div id="elements">
+	<img src="images/blank.gif" width="380px" height="1px"/>
+	<ul  name="defaults" id="defaults" class="defaults">		
+		<li name="ed_label" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td colspan="2"><div name="label" style="color:#336699;font-size: 16px;font-weight: bold;">Title / Label</div></td><td align="right" ><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_sublabel" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td colspan="2"><div name="label" style="color:#336699;font-size: 12px;font-weight: bold;">Subtitle / Sublabel</div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_dndisplay" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">DN Display:</div></td><td class="row2"><div name="dndisplay">DN to display</div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_textfield" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Text field:</div></td><td class="row2"><input type="text" value="" size="25"></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_objektfield" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Object field:</div></td><td class="row2"><input type="text" value="" size="25"><img name="lupe" src="images/formdesign/lupe.gif"/><img name="choose" src="images/formdesign/choose.gif"/><img name="rubber" src="images/formdesign/rubber.gif"/><img name="delete" src="images/formdesign/delete.gif"/></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_password" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Password:</div></td><td class="row2"><input type="password" value="" size="25"></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_textarea" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Textarea:</div></td><td class="row2"><textarea rows="3" cols="28"></textarea></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_radiopick" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Radio Picklist:</div></td><td class="row2"><div name="radios"><input name="radio" type="radio">Radio1 <input name="radio" type="radio">Radio2</div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_mvcheckbox" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Checkbox:</div></td><td class="row2"><div name="boxes"><input type="checkbox" value="true">Option1 <input type="checkbox" value="false">Option2 </div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_picklist" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Picklist:</div></td><td class="row2"><div name="picks"><select><option selected="selected">Click here to select a value ...</option><option>Item1</option><option>Item2</option><option>Item3</option></select></div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_pickfield" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Multi Value Picklist</div></td><td class="row2"><table><tr><td><div name="picks" style="vertical-align: middle;"><select size="3" class="selects"><option value="" selected="selected">Value1</option><option>Value2</option></select></div></td><td align="left"><img name="lupe" src="images/formdesign/lupe.gif"/><img name="choose" src="images/formdesign/choose.gif"/><img name="rubber" src="images/formdesign/rubber.gif"/><img name="delete" src="images/formdesign/delete.gif"/></td></tr></table></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_selectlist" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">Multi Value Selectlist</div></td><td class="row2"><div name="picks"><table><tr><td><select class="selects" size="3"><option value="" selected="selected">Value1</option><option>Value2</option></select></td><td><img src="images/formdesign/rightleft.png"/></td><td><select size="3"  class="selects" ></select></td></tr></table></div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_html" class="elementssort" onclick="javascript:editthis(this)">
+			<div><table><tr><td class="row1"><div name="label">HTML</div></td><td class="row2"><div name="somehtml">HTML Source</div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_datatable" class="elementssort addon" onclick="javascript:editthis(this)" hidden="hidden">
+			<div><table><tr><td class="row1"><div name="label">Datatable</div></td><td class="row2"><img src="images/formdesign/datatable.png" width="250px"/></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/><br><img class="infoicon" src="images/info.png" width="16px" onclick="javascript:$('#infodtldap').dialog('open');"/></td></tr></table></div>
+		</li>
+		<li name="ed_hr" class="elementssort"  onclick="javascript:editthis(this)">
+			<div ><table ><tr><td><hr class="style-one"/></td><td align="right" width="16px"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+		<li name="ed_buttons" class="elementssort" onclick="javascript:editthis(this)" >
+			<div><table><tr><td class="row1"><div name="label">&nbsp;</div></td><td class="row2"><div name="buttons"><input type="button" name="buttons" value="submit"/><input type="button" name="buttons" value="cancel"/></div></td><td align="right"><img class="delicon" src="images/del.png" width="16px" onclick="javascript:delthis(this)"/></td></tr></table></div>
+		</li>
+	</ul>
+</div>
+
+<div id="properties" class="properties" title="Properties" style="background-color: #FFCCCC;"></div>
+</td></tr>
+</table>
+<button onclick="javascript:saveFormDesign()">Save</button> <button onclick="javascript:resetFormDesign()">Reset</button>
+<br><br>
+<img src="images/help.png" width="16px" onclick="javascript:$('#help2').dialog('open')"/>
+</div>
+	<div id="tabs-3" align="left">
+	<select id="displaytype"><option value="JSON">JSON</option><option value="XML">XML</option><option value="HTML">HTML</option></select>
+	<div id="formview"></div>
+	</div>
+</div>
+	   	
+<div id="help1" class="help" title="Workflow Designer Help">
+	<p>All Workflow Designs are Stored / Listed here<br>
+	These Forms represent the Request / Approval Forms from the IDM Portal / Workflows</p>
+	<p><img src="images/edit.png" width="16px"> Edit a Form / Design<br>
+	<img src="images/show.png" width="16px"> Display / Export a Form / Design <br>
+	<img src="images/export.png" width="16px"> Export the Object<br>
+	<img src="images/del.png" width="16px"> Delete this Version of this Object<br>If there is only one Version, the Object will be deleted completly.</p>
+	<div id="closebutton"><button onclick="javascript:$('#help1').dialog('close');">Close</button></div>
+</div>
+<div id="help2" class="help" title="Workflow Design Editor Help">
+	<p>Klick on the Right Items in the Box to Add it to the the Formular<br>
+	You can then Edit its Properties by Leftclick on it on the Left. A Popup Box will apear.<br>
+	You can sort the Items by Drag and Drop.</p>
+	<p>Klick on Addons to Display available Addons for the Formulars in the Portal.<br>
+	To Preview the Form (Remove Distractions), you can tick the Preview Box</p>
+	<p>
+	<img src="images/del.png" width="16px"> Delete this Item from the Form (Only on the Left Side)<br></p>
+	<div id="closebutton"><button onclick="javascript:$('#help2').dialog('close');">Close</button></div>
+</div>
+<div id="infodtldap" class="help" title="Datatables Cacher Service">
+	<p><a href="http://http://www.skypro.ch/index.php/products/dtldap" target="new">LDAP Datatable - Cacher Service</a></p>
+	<p>This is a Addon Product, and needs to be purchased separatly</p>
+	<div id="closebutton"><button onclick="javascript:$('#infodtldap').dialog('close');">Close</button></div>
+</div>
+</div>
+<div id="moduleversion"></div>
+</body>
+</html> -->
